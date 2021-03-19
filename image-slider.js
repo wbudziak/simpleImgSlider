@@ -1,11 +1,12 @@
-const btnLeft = document.querySelector('.container__button--left');
-const btnRight = document.querySelector('.container__button--right');
-const imgBox = document.querySelector('.container__img-box');
-const image = [...document.querySelectorAll('.container__img')];
-const arrowLeft = document.querySelector('.container__arrow-left');
-const arrowRight = document.querySelector('.container__arrow-right');
-const slideBtn = document.querySelector('.container__slide-btn');
+const btnLeft = document.querySelector('.image-slider__button--left');
+const btnRight = document.querySelector('.image-slider__button--right');
+const imgBox = document.querySelector('.image-slider__img-box');
+const image = [...document.querySelectorAll('.image-slider__img')];
+const arrowLeft = document.querySelector('.image-slider__arrow-left');
+const arrowRight = document.querySelector('.image-slider__arrow-right');
+const slideBtn = document.querySelector('.image-slider__slide-btn');
 const spanNumber = document.querySelector('span');
+
 let movePX = 0;
 let number = 1;
 let slideInterval;
