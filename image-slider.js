@@ -1,24 +1,33 @@
 const btnLeft = document.querySelector('.image-slider__button--left');
 const btnRight = document.querySelector('.image-slider__button--right');
 const imgBox = document.querySelector('.image-slider__img-box');
+const previewImgBox = document.querySelector('.preview-slider__img-box');
 const image = [...document.querySelectorAll('.image-slider__img')];
+const imgURL = [...document.querySelectorAll('.img-id')];
 const arrowLeft = document.querySelector('.image-slider__arrow-left');
 const arrowRight = document.querySelector('.image-slider__arrow-right');
 const slideBtn = document.querySelector('.image-slider__slide-btn');
 const spanNumber = document.querySelector('span');
-
-let movePX = 0;
+let previewElement = [];
+let moveSlider = 0;
+let movePreview = 0;
+let moveSliderValue = 100;
+let movePreviewValue = 25;
 let number = 1;
+let numberPreview = 1;
 let slideInterval;
 let slideTransition = 3000;
+let slideFlag = true;
 
-const start = () => {
+
+const imgBoxWidth = () => {
     imgBox.style.width = `${image.length * 100}%`;
-    spanNumber.textContent = `Picture ${number}/${image.length}`;
 }
+
 const numberOfPicture = () => {
     spanNumber.textContent = `Image ${number} of ${image.length}`;
 }
+
 const animation = () => {
     imgBox.style.transition = "0s linear all";
     imgBox.style.filter = "blur(10px)";
@@ -27,34 +36,90 @@ const animation = () => {
         imgBox.style.transition = ".3s linear all";
     }, 300);
 }
+
+const previewPictures = () => {
+    if (image.length === 1) {
+        previewImgBox.style.width = `${image.length * 100}%`;
+    }
+    if (image.length === 2) {
+        previewImgBox.style.width = `${image.length * 50}%`;
+    }
+    if (image.length === 3) {
+        previewImgBox.style.width = `${image.length * 33.33}%`;
+    }
+    if (image.length >= 4) {
+        previewImgBox.style.width = `${image.length * 25}%`;
+    }
+    for (let i = 0; i < image.length; i++) {
+        const previewSlideImg = document.createElement('div');
+        previewSlideImg.className = "preview-slider__img";
+        const previewImg = document.createElement('img');
+        previewImg.src = imgURL[i].src;
+        previewSlideImg.appendChild(previewImg);
+        previewImgBox.appendChild(previewSlideImg);
+        previewElement.push(previewSlideImg);
+    }
+    previewElement.forEach((element, index) => {
+        const previewNumber = index;
+        element.addEventListener("click", () => {
+            moveSlider = 0;
+            movePreview = 0;
+            if (previewNumber >= number) {
+                moveSlider -= (moveSliderValue * previewNumber);
+                imgBox.style.left = `${moveSlider}%`;
+                movePreview -= (movePreviewValue * previewNumber);
+                previewImgBox.style.left = `${movePreview}%`;
+            }
+            if (previewNumber < number) {
+                moveSlider += (moveSliderValue * previewNumber);
+                imgBox.style.left = `${moveSlider}%`;
+                movePreview += (movePreviewValue * previewNumber);
+                previewImgBox.style.left = `${movePreview}%`;
+            }
+            // number = previewNumber + 1;
+            numberOfPicture();
+        })
+    });
+}
+
 const slideLeft = () => {
     if (number <= 1) {
         animation()
         number = image.length;
         numberOfPicture();
-        movePX = ((image.length - 1) * -100);
-        imgBox.style.left = `${movePX}%`;
+        moveSlider = ((image.length - 1) * -moveSliderValue);
+        movePreview = ((image.length - 1) * -movePreviewValue);
+        imgBox.style.left = `${moveSlider}%`;
+        previewImgBox.style.left = `${movePreview}%`;
         return;
     }
     number--;
     numberOfPicture();
-    movePX += 100;
-    imgBox.style.left = `${movePX}%`;
+    moveSlider += moveSliderValue;
+    imgBox.style.left = `${moveSlider}%`;
+    movePreview += movePreviewValue;
+    previewImgBox.style.left = `${movePreview}%`;
+
 }
+
 const slideRight = () => {
     arrowLeft.style.transform = "translateX(-5px);";
     if (number >= image.length) {
         animation()
         imgBox.style.left = `0%`;
+        previewImgBox.style.left = `0%`;
         number = 1;
         numberOfPicture();
-        movePX = 0;
+        moveSlider = 0;
+        movePreview = 0;
         return;
     }
     number++;
     numberOfPicture();
-    movePX -= 100;
-    imgBox.style.left = `${movePX}%`;
+    moveSlider -= moveSliderValue;
+    imgBox.style.left = `${moveSlider}%`;
+    movePreview -= movePreviewValue;
+    previewImgBox.style.left = `${movePreview}%`;
 }
 
 btnLeft.addEventListener('click', slideLeft);
@@ -76,7 +141,6 @@ btnRight.addEventListener("mousedown", () => {
 btnRight.addEventListener("mouseup", () => {
     arrowRight.style.transform = "translateX(0px)";
 })
-let slideFlag = true;
 
 slideBtn.addEventListener('click', () => {
 
@@ -98,5 +162,6 @@ slideBtn.addEventListener('click', () => {
     }
 })
 
-start();
+imgBoxWidth();
+previewPictures();
 numberOfPicture();
