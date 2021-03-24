@@ -203,8 +203,6 @@ body {
   color: white;
   -webkit-box-sizing: padding-box;
           box-sizing: padding-box;
-  margin-left: .25%;
-  margin-right: .25%;
 }
 
 .preview-slider__img img {

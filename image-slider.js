@@ -8,22 +8,19 @@ const arrowLeft = document.querySelector('.image-slider__arrow-left');
 const arrowRight = document.querySelector('.image-slider__arrow-right');
 const slideBtn = document.querySelector('.image-slider__slide-btn');
 const spanNumber = document.querySelector('span');
+
+let slideTransition = 3000;
+let moveSliderValue = 100;
+let movePreviewValue = 25;
 let previewElement = [];
 let moveSlider = 0;
 let movePreview = 0;
-let moveSliderValue = 100;
-let movePreviewValue = 25;
 let number = 1;
 let previewNumber = 1;
-let numberPreview = 1;
 let slideInterval;
-let slideTransition = 3000;
 let slideFlag = true;
 
-
-const imgBoxWidth = () => {
-    imgBox.style.width = `${image.length * 100}%`;
-}
+imgBox.style.width = `${image.length * 100}%`;
 
 const numberOfPicture = () => {
     spanNumber.textContent = `Image ${number} of ${image.length}`;
@@ -36,13 +33,6 @@ const animation = () => {
         imgBox.style.filter = "blur(0)";
         imgBox.style.transition = ".3s linear all";
     }, 300);
-}
-
-const addNumber = () => {
-    number++;
-}
-const substractionNumber = () => {
-    number--;
 }
 
 const previewPictures = () => {
@@ -68,25 +58,16 @@ const previewPictures = () => {
         previewElement.push(previewSlideImg);
     }
     previewElement.forEach((element, index) => {
-        let idPreview = index;
+        let idPreview = index + 1;
         element.addEventListener("click", () => {
             moveSlider = 0;
             movePreview = 0;
-            if (previewNumber < number) {
-                previewNumber = idPreview + 1;
-                number--;
-                moveSlider += (moveSliderValue * (previewNumber - 1));
-                imgBox.style.left = `${moveSlider}%`;
-                movePreview += (movePreviewValue * (previewNumber - 1));
-                previewImgBox.style.left = `${movePreview}%`;
-            } else {
-                previewNumber = idPreview + 1;
-                number = previewNumber;
-                moveSlider -= (moveSliderValue * (previewNumber - 1));
-                imgBox.style.left = `${moveSlider}%`;
-                movePreview -= (movePreviewValue * (previewNumber - 1));
-                previewImgBox.style.left = `${movePreview}%`;
-            }
+            previewNumber = idPreview;
+            number = previewNumber;
+            moveSlider -= (moveSliderValue * (previewNumber - 1));
+            imgBox.style.left = `${moveSlider}%`;
+            movePreview -= (movePreviewValue * (previewNumber - 1));
+            previewImgBox.style.left = `${movePreview}%`;
             numberOfPicture();
         })
     });
@@ -96,7 +77,6 @@ const slideLeft = () => {
     if (number <= 1) {
         animation()
         number = image.length;
-        console.log(number);
         numberOfPicture();
         moveSlider = ((image.length - 1) * -moveSliderValue);
         movePreview = ((image.length - 1) * -movePreviewValue);
@@ -104,19 +84,15 @@ const slideLeft = () => {
         previewImgBox.style.left = `${movePreview}%`;
         return;
     }
-    substractionNumber();
-    console.log(number);
-
+    number--;
     numberOfPicture();
     moveSlider += moveSliderValue;
     imgBox.style.left = `${moveSlider}%`;
     movePreview += movePreviewValue;
     previewImgBox.style.left = `${movePreview}%`;
-
 }
 
 const slideRight = () => {
-    arrowLeft.style.transform = "translateX(-5px);";
     if (number >= image.length) {
         animation()
         imgBox.style.left = `0%`;
@@ -127,9 +103,7 @@ const slideRight = () => {
         movePreview = 0;
         return;
     }
-    addNumber();
-    console.log(number);
-
+    number++;
     numberOfPicture();
     moveSlider -= moveSliderValue;
     imgBox.style.left = `${moveSlider}%`;
@@ -138,27 +112,8 @@ const slideRight = () => {
 }
 
 btnLeft.addEventListener('click', slideLeft);
-
-btnLeft.addEventListener("mousedown", () => {
-    arrowLeft.style.transform = "translateX(-5px)";
-})
-
-btnLeft.addEventListener("mouseup", () => {
-    arrowLeft.style.transform = "translateX(0px)";
-})
-
 btnRight.addEventListener('click', slideRight);
-
-btnRight.addEventListener("mousedown", () => {
-    arrowRight.style.transform = "translateX(5px)";
-})
-
-btnRight.addEventListener("mouseup", () => {
-    arrowRight.style.transform = "translateX(0px)";
-})
-
 slideBtn.addEventListener('click', () => {
-
     if (slideFlag) {
         slideFlag = !slideFlag;
         slideBtn.innerHTML = '<i class="fas fa-pause"></i>';
@@ -177,6 +132,18 @@ slideBtn.addEventListener('click', () => {
     }
 })
 
-imgBoxWidth();
+btnLeft.addEventListener("mousedown", () => {
+    arrowLeft.style.transform = "translateX(-5px)";
+})
+btnLeft.addEventListener("mouseup", () => {
+    arrowLeft.style.transform = "translateX(0px)";
+})
+btnRight.addEventListener("mousedown", () => {
+    arrowRight.style.transform = "translateX(5px)";
+})
+btnRight.addEventListener("mouseup", () => {
+    arrowRight.style.transform = "translateX(0px)";
+})
+
 previewPictures();
 numberOfPicture();

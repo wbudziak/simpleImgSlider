@@ -20,7 +20,7 @@ body {
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    border-radius: 15px;    
+    border-radius: 15px;
 
     &__button {
         cursor: pointer;
@@ -41,17 +41,20 @@ body {
 
         &--left {
             left: -10%;
-            transition: all 0.3s cubic-bezier(1,.01,.32,1);        }
+            transition: all 0.3s cubic-bezier(1, .01, .32, 1);
+        }
 
         &--right {
             right: -10%;
-            transition: all 0.3s cubic-bezier(1,.01,.32,1);        }
+            transition: all 0.3s cubic-bezier(1, .01, .32, 1);
+        }
     }
 
-    &:hover &__button{
+    &:hover &__button {
         &--left {
             left: 5%;
         }
+
         &--right {
             right: 5%;
         }
@@ -74,10 +77,10 @@ body {
         transition: .3s ease all;
     }
 
-    &:hover &__slide-btn{
+    &:hover &__slide-btn {
         bottom: 10%;
-     }
-     
+    }
+
     &__img-box {
         position: absolute;
         height: 100%;
@@ -120,6 +123,7 @@ body {
         font-size: 24px;
     }
 }
+
 .preview-slider {
     margin-top: 25px;
     max-width: 750px;
@@ -131,7 +135,7 @@ body {
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    
+
     &__img-box {
         position: absolute;
         height: 100%;
@@ -141,10 +145,7 @@ body {
         align-items: center;
         justify-content: center;
         transition: all 0.25s ease;
-        
     }
-        
-   
 
     &__img {
         cursor: pointer;
@@ -157,10 +158,6 @@ body {
         font-size: 30px;
         color: white;
         box-sizing: padding-box;
-        margin-left: .25%;
-        margin-right: .25%;
-        
-        
 
         img {
             position: absolute;
@@ -172,5 +169,5 @@ body {
             z-index: -1;
         }
     }
- 
+
 }
