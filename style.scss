@@ -130,8 +130,8 @@ body {
     border-radius: 15px;
     box-sizing: border-box;
     position: relative;
-    // overflow: hidden;
-
+    overflow: hidden;
+    
     &__img-box {
         position: absolute;
         height: 100%;
@@ -141,7 +141,10 @@ body {
         align-items: center;
         justify-content: center;
         transition: all 0.25s ease;
+        
     }
+        
+   
 
     &__img {
         cursor: pointer;
@@ -153,6 +156,11 @@ body {
         justify-content: center;
         font-size: 30px;
         color: white;
+        box-sizing: padding-box;
+        margin-left: .25%;
+        margin-right: .25%;
+        
+        
 
         img {
             position: absolute;
