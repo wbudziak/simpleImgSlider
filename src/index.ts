@@ -1,23 +1,23 @@
-const btnLeft = document.querySelector('.image-slider__button--left');
-const btnRight = document.querySelector('.image-slider__button--right');
-const imgBox = document.querySelector('.image-slider__img-box');
-const previewImgBox = document.querySelector('.preview-slider__img-box');
-const image = [...document.querySelectorAll('.image-slider__img')];
-const imgURL = [...document.querySelectorAll('.img-id')];
-const arrowLeft = document.querySelector('.image-slider__arrow-left');
-const arrowRight = document.querySelector('.image-slider__arrow-right');
-const slideBtn = document.querySelector('.image-slider__slide-btn');
-const spanNumber = document.querySelector('span');
+const btnLeft = document.querySelector<HTMLButtonElement>('.image-slider__button--left');
+const btnRight = document.querySelector<HTMLButtonElement>('.image-slider__button--right');
+const imgBox = document.querySelector<HTMLDivElement>('.image-slider__img-box');
+const previewImgBox = document.querySelector<HTMLDivElement>('.preview-slider__img-box');
+const image = [...document.querySelectorAll<HTMLImageElement>('.image-slider__img')];
+const imgURL = [...document.querySelectorAll<HTMLImageElement>('.img-id')];
+const arrowLeft = document.querySelector<HTMLElement>('.image-slider__arrow-left');
+const arrowRight = document.querySelector<HTMLElement>('.image-slider__arrow-right');
+const slideBtn = document.querySelector<HTMLButtonElement>('.image-slider__slide-btn');
+const spanNumber = document.querySelector<HTMLSpanElement>('span');
 
 let slideTransition = 3000;
 let moveSliderValue = 100;
 let movePreviewValue = 25;
-let previewElement = [];
+let previewElement: HTMLDivElement[] = [];
 let moveSlider = 0;
 let movePreview = 0;
 let number = 1;
 let previewNumber = 1;
-let slideInterval;
+let slideIntervalId: ReturnType<typeof setTimeout> | undefined;
 let slideFlag = true;
 
 imgBox.style.width = `${image.length * 100}%`;
@@ -117,17 +117,17 @@ slideBtn.addEventListener('click', () => {
     if (slideFlag) {
         slideFlag = !slideFlag;
         slideBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        slideInterval = setInterval(() => {
+        slideIntervalId = setInterval(() => {
             slideRight();
             if (number === 1) {
-                window.clearInterval(slideInterval);
+                window.clearInterval(slideIntervalId);
                 slideBtn.innerHTML = `<i class="fas fa-play"></i>`;
                 slideFlag = !slideFlag;
             }
         }, slideTransition);
     } else {
         slideFlag = !slideFlag;
-        window.clearInterval(slideInterval);
+        window.clearInterval(slideIntervalId);
         slideBtn.innerHTML = `<i class="fas fa-play"></i>`;
     }
 })

@@ -1,11 +1,23 @@
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
-        filename: 'index.js',
+        filename: 'index.ts',
     },
     devServer: {
         contentBase: './dist',
         port: 3000,
     },
+    module: {
+        rules: [
+            {
+                test: /\.ts?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['.ts', '.js'],
+    }
 };
