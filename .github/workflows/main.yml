@@ -4,12 +4,16 @@ on:
     branches: [ main ]
   workflow_dispatch:
 jobs:
-  build:
+  build & deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Initiallize build dirs
         run: unset CI && yarn install && yarn build
+      - name: Initiallize build dirs
+        run: |
+          git config user.email "ci-build@test.pl"
+          git config user.name "ci-build"
       - name: Deploy changes to gh-pages
         run: yarn deploy
         env:
