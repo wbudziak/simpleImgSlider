@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
     mode: 'development',
     entry: './src/index.js',
@@ -7,8 +5,7 @@ module.exports = {
         filename: 'index.js',
     },
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        compress: true,
+        contentBase: './dist',
         port: 3000,
     },
 };
