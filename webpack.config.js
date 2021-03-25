@@ -1,8 +1,8 @@
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
-        filename: 'index.js',
+        filename: 'index.ts',
     },
     devServer: {
         contentBase: './dist',
