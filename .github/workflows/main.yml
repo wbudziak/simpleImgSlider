@@ -1,7 +1,4 @@
 name: CI
-stages:
-  - build
-  - package
 on:
   push:
     branches: [ main ]
