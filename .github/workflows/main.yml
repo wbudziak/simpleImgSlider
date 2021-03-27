@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Initiallize build dirs
+      - name: Install ⚙
         run: unset CI && yarn install && yarn build
         env:
           CI: false
@@ -16,10 +16,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Initiallize build dirs
-        run: |
-          git init
-          git config user.email "ci-build@test.pl"
-          git config user.name "ci-build"
-      - name: Deploy changes to gh-pages
-        run: yarn deploy
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
