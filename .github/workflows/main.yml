@@ -9,9 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install ⚙
-        run: unset CI && yarn install && yarn build
-        env:
-          CI: false
+        run: yarn install --frozen-lockfile && yarn build
   deploy:
     needs: build
     runs-on: ubuntu-latest
