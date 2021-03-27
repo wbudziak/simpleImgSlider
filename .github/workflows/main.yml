@@ -7,15 +7,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checokout ⚖
+        uses: actions/checkout@v2
       - name: Install ⚙
         run: yarn install --frozen-lockfile && yarn build
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: build # The folder the action should deploy.
+          branch: gh-pages
+          folder: dist
