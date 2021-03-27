@@ -18,6 +18,7 @@ jobs:
     steps:
       - name: Initiallize build dirs
         run: |
+          git init
           git config user.email "ci-build@test.pl"
           git config user.name "ci-build"
       - name: Deploy changes to gh-pages
