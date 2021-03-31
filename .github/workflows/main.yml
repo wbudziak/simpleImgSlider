@@ -10,7 +10,9 @@ jobs:
       - name: Checokout ⚖
         uses: actions/checkout@v2
       - name: Install ⚙
-        run: yarn install --frozen-lockfile && yarn build
+        run: yarn install --frozen-lockfile
+      - name: Build 🏗
+        run: yarn install --frozen-lockfile
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
